@@ -248,6 +248,8 @@ def get_user(email):
 def update_student(user_id):
     data = request.get_json()
     cursor = conn.cursor()
+    
+    
     cursor.execute(
         "UPDATE user SET fb_link=%s WHERE user_id=%s", (data.get("fb_link"), user_id)
     )
@@ -264,6 +266,7 @@ def update_student(user_id):
     conn.commit()
     cursor.close()
     return jsonify({"message": "User updated successfully!"})
+
 
 
 # @app.route("/customers", methods=["GET"])
