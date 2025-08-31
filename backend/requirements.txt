@@ -1,0 +1,9 @@
+Package                Version
+---------------------- -------
+flask-cors             6.0.1
+mysql-connector-python 9.4.0
+pip                    25.2
+
+
+# pip install flask mysql-connector-python flask-cors pyjwt
+# python app.py 
