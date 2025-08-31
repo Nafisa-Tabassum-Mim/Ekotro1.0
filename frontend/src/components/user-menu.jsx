@@ -47,7 +47,7 @@ export default function UserMenu({ token }) {
         return (
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <BoltIcon size={16} className="opacity-60" /> <NavLink to="/user_profile">Profile</NavLink>
+              <BoltIcon size={16} className="opacity-60" /> 
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Layers2Icon size={16} className="opacity-60" /> Create Event
@@ -80,7 +80,7 @@ export default function UserMenu({ token }) {
         return (
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <BoltIcon size={16} className="opacity-60" /> <NavLink to="/user_profile">Profile</NavLink>
+              <BoltIcon size={16} className="opacity-60" /> <NavLink to="/student_profile">Profile</NavLink>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Layers2Icon size={16} className="opacity-60" /> Event Wishlist

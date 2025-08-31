@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { FaRegUser } from "react-icons/fa";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import { Label } from "@/components/ui/label"
 import { Spinner } from '@/components/ui/shadcn-io/spinner';
 
-// import { Spinner } from "@/components/ui/spinner"; // if you have a spinner component
 
-const UserProfile = () => {
+const StudentProfile = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true); // <-- loader state
     const [frontPreview, setFrontPreview] = useState(null);
@@ -59,20 +54,18 @@ const UserProfile = () => {
         );
     }
 
-
-    const updateUserInfo = async (e,id) => {
+    const updateUserInfo = async (e, id) => {
         e.preventDefault()
         const uni_name = e.target.uni_name.value
         const dept = e.target.dept.value
         const fb_link = e.target.fb_link.value
         const front_part = e.target.front_part.files[0]
         const back_part = e.target.back_part.files[0]
-
-        console.log(id,uni_name, dept, fb_link, front_part, back_part)
+        // console.log(id, uni_name, dept, fb_link, front_part, back_part)
 
         const NewUserInfo = { uni_name, dept, fb_link, front_part, back_part }
 
-        await fetch("http://127.0.0.1:5000/updateStudent/id", {
+        await fetch(`http://127.0.0.1:5000/updateStudent/${id}`, {
             method: 'PATCH',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(NewUserInfo)
@@ -86,7 +79,7 @@ const UserProfile = () => {
             });
     }
 
-    console.log(user)
+    // console.log(user)
     return (
         <div className="flex min-h-screen w-full bg-gray-50 p-6">
             <div className="grid w-full gap-6 md:grid-cols-[280px_1fr]">
@@ -147,8 +140,7 @@ const UserProfile = () => {
                                     <p className="text-md pb-2 font-bold text-gray-700">University</p>
                                     <Input
                                         placeholder="University name"
-                                        default={user.uni_name}
-
+                                        defaultValue={user.uni_name}
                                         name="uni_name"
                                     />
                                 </div>
@@ -156,14 +148,14 @@ const UserProfile = () => {
                                     <p className="text-md pb-2 font-bold text-gray-700">Department</p>
                                     <Input
                                         placeholder="Department name"
-                                        default={user.dept}
+                                        defaultValue={user.dept}
                                         name="dept"
                                     />
                                 </div>
                                 <div className="mt-4">
                                     <p className="text-md pb-2 font-bold text-gray-700">Facebook ID</p>
                                     <Input
-                                        default={user.fb_link}
+                                        defaultValue={user.fb_link}
                                         placeholder="Facebook Link"
                                         name="fb_link"
                                     />
@@ -222,4 +214,4 @@ const UserProfile = () => {
     );
 };
 
-export default UserProfile;
+export default StudentProfile;

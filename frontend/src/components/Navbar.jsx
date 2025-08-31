@@ -31,8 +31,8 @@ export default function Navbar() {
   const token = localStorage.getItem("access-token"); 
   if (token) {
     const decoded = jwtDecode(token);
-    console.log(decoded.role);
-    console.log(decoded.public_id);
+    // console.log(decoded.role);
+    // console.log(decoded.public_id);
   } else {
     console.log("No token found");
   }

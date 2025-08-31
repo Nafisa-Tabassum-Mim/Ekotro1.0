@@ -6,7 +6,8 @@ import Login from './frontend_part/authentication/Login';
 import StudentRegister from './frontend_part/authentication/StudentRegister';
 import CompanyRegister from './frontend_part/authentication/CompanyRegister';
 import Root from './frontend_part/root/Root';
-import UserProfile from './frontend_part/CommonPage/UserProfile';
+// import UserProfile from './frontend_part/CommonPage/UserProfile';
+import StudentProfile from './frontend_part/Profile/StudentProfile';
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,8 @@ const router = createBrowserRouter([
     element: <CompanyRegister></CompanyRegister>,
   },
   {
-    path: "/user_profile",
-    element: <UserProfile></UserProfile>,
+    path: "/student_profile",
+    element: <StudentProfile></StudentProfile>,
   }
 ]);
 
