@@ -195,6 +195,8 @@ def token_required(f):
     return decorator
 
 
+
+
 # @app.route("/", methods=["GET"])
 # @token_required
 # def home(login_user):
@@ -223,9 +225,9 @@ def token_required(f):
 # student part
 
 
-@app.route("/user", methods=["GET"])
+@app.route("/student_user", methods=["GET"])
 @token_required
-def get_user(email):
+def get_student_user(email):
     cursor = conn.cursor(dictionary=True)
     cursor.execute(
         """
@@ -268,78 +270,85 @@ def update_student(user_id):
     return jsonify({"message": "User updated successfully!"})
 
 
+@app.route("/applyAmbassador/<int:user_id>", methods=["POST"])
+def apply_for_sa(user_id):
+    data = request.get_json()
+    cursor = conn.cursor()
 
-# @app.route("/customers", methods=["GET"])
-# def get_customers():
-#     cursor = conn.cursor(
-#         dictionary=True
-#     )  # dictionary=True → returns dict instead of tuple
-#     cursor.execute("SELECT * FROM customer")
-#     customers = cursor.fetchall()
-#     cursor.close()
-#     return jsonify(customers)
+    try:
+        # ✅ Update fb_link in user table
+        cursor.execute(
+            "UPDATE user SET fb_link = %s WHERE user_id = %s",
+            (data.get("fb_link"), user_id)
+        )
+
+        # ✅ Insert into student_ambassador table
+        cursor.execute(
+            """
+            INSERT INTO student_ambassador (sa_id, uni_name, dept, club_name, club_position, uni_weblink)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            """,
+            (
+                user_id,
+                data.get("uni_name"),
+                data.get("dept"),
+                # data.get("front_part"),   
+                # data.get("back_part"),   
+                data.get("club_name"),
+                data.get("club_position"),
+                data.get("uni_weblink")
+            ),
+        )
+
+        conn.commit()
+        return jsonify({"message": "Applied for Ambassador successfully!"}), 201
+
+    except Exception as e:
+        conn.rollback()
+        return jsonify({"error": str(e)}), 500
+
+    finally:
+        cursor.close()
+
+# company part 
+
+@app.route("/company_user", methods=["GET"])
+@token_required
+def get_user(email):
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(
+        """
+        SELECT u.user_id, u.name, u.email, u.fb_link, u.role, u.photo, c.web_link FROM user u
+        JOIN company c ON u.user_id = c.c_id
+        WHERE u.email = %s
+    """,
+        (email,),
+    )
+
+    user_company = cursor.fetchone()
+    cursor.close()
+
+    if not user_company:
+        return jsonify({"error": "User/Company not found"}), 404
+    return jsonify(user_company)
 
 
-# @app.route("/customers", methods=["POST"])
-# def add_customer():
-#     data = request.get_json()
-#     customer_city = data.get("customer_city")
-#     customer_name = data.get("customer_name")
-#     customer_street = data.get("customer_street")
-#     customer_id = data.get("customer_id")
 
-#     cursor = conn.cursor()
-#     cursor.execute(
-#         "INSERT INTO customer (customer_city, customer_name,customer_street,customer_id ) VALUES (%s, %s,%s,%s)",
-#         (customer_city, customer_name, customer_street, customer_id),
-#     )
-#     conn.commit()  # Save changes
-#     cursor.close()
+@app.route("/updateCompany/<int:id>", methods=["PATCH"])
+def update_company(id):
+        data = request.get_json()
+        fb_link = data.get("fb_link")
 
-#     return jsonify({"message": "Customer added successfully!"}), 201
+        cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE user SET fb_link = %s WHERE user_id = %s",
+            (fb_link, id)
+        )
+        conn.commit()
+        cursor.close()
 
-
-# @app.route("/customers/<string:id>", methods=["DELETE"])
-# def delete_customer(id):
-#     cursor = conn.cursor()
-#     cursor.execute("delete from customer WHERE customer_id=%s", (id,))
-
-#     conn.commit()
-#     cursor.close()
-#     return jsonify({"message": f"deleted {id}"})
-
-
-# @app.route("/customer/<int:id>", methods=["PATCH"])
-# def update_customer(id):
-#     data = request.get_json()
-#     cursor = conn.cursor()
-
-#     cursor.execute(
-#         "INSERT INTO customer set customer_city=%s, customer_name=%s,customer_street=%s WHERE customer_id=%s",
-#         data["customer_city"],
-#         data["customer_name"],
-#         data["customer_street"],
-#     )
-
-#     conn.commit()  # Save changes
-#     cursor.close()
-#     return jsonify({"message": "updated"})
-
-
-# def role_required(required_role):
-#     def wrapper(fn):
-#         @wraps(fn)
-#         def decorated(*args, **kwargs):
-#             token = request.headers.get("Authorization").split(" ")[1]
-#             try:
-#                 data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
-#                 if data["role"] != required_role:
-#                     return jsonify({"error": "Access denied"}), 403
-#             except:
-#                 return jsonify({"error": "Invalid token"}), 401
-#             return fn(*args, **kwargs)
-#         return decorated
-#     return wrapper
+        return jsonify({"message": "Company info updated successfully"}), 200
+    
 
 # @app.route("/admin-only")
 # @role_required("admin")

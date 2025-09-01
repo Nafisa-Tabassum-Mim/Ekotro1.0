@@ -4,6 +4,7 @@ flask-cors             6.0.1
 mysql-connector-python 9.4.0
 pip                    25.2
 
-
+# py -3 -m venv .venv
+# .venv\Scripts\activate
 # pip install flask mysql-connector-python flask-cors pyjwt
 # python app.py 
