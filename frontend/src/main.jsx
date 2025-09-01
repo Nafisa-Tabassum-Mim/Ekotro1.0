@@ -9,6 +9,7 @@ import Root from './frontend_part/root/Root';
 // import UserProfile from './frontend_part/CommonPage/UserProfile';
 import StudentProfile from './frontend_part/Profile/StudentProfile';
 import CompanyProfile from './frontend_part/Profile/CompanyProfile';
+import ApplySaForm from './frontend_part/Profile/ApplySaForm';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
     //   {
     //     path: '/',
     //     element: <Root></Root>,
-    //     // loader: () => fetch('https://tourism-website-server-jade.vercel.app/tourism')
+    //     // loader: () => fetch('https://nextbell-website-server-jade.vercel.app/nextbell')
     //   },
     // ],
   },
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
   {
     path: "/company_profile",
     element: <CompanyProfile></CompanyProfile>,
+  },
+  {
+    path: "/apply_sa",
+    element: <ApplySaForm></ApplySaForm>,
   }
 ]);
 

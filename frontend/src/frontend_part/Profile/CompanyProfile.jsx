@@ -76,9 +76,6 @@ const CompanyProfile = () => {
                     <p className="text-md text-gray-500 break-all">
                         {user.email}
                     </p>
-                    <p className=" text-sm text-gray-600">
-                        {user.uni_name}
-                    </p>
                     <div className="mt-2 w-full">
                         <p className="text-xs font-medium text-gray-600 mb-1">
                             Profile Completeness
