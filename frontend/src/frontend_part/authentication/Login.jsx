@@ -11,7 +11,7 @@ const Login = () => {
         const email = e.target.email.value
         const password = e.target.password.value
 
-        console.log(name, email, password)
+        // console.log(name, email, password)
 
         const newRegister = { name, email, password }
 
@@ -32,7 +32,7 @@ const Login = () => {
                     return;
                 }
                 // success case
-                console.log("✅ login successful:", data);
+                // console.log("✅ login successful:", data);
                 setError(""); // clear previous error
                 // Save token in localStorage
                 localStorage.setItem("access-token", data.token); // <-- store token

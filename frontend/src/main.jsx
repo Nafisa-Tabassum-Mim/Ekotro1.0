@@ -8,6 +8,7 @@ import CompanyRegister from './frontend_part/authentication/CompanyRegister';
 import Root from './frontend_part/root/Root';
 // import UserProfile from './frontend_part/CommonPage/UserProfile';
 import StudentProfile from './frontend_part/Profile/StudentProfile';
+import CompanyProfile from './frontend_part/Profile/CompanyProfile';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "/student_profile",
     element: <StudentProfile></StudentProfile>,
+  },
+  {
+    path: "/company_profile",
+    element: <CompanyProfile></CompanyProfile>,
   }
 ]);
 

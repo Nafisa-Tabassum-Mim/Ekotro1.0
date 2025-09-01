@@ -24,7 +24,7 @@ const StudentProfile = () => {
     useEffect(() => {
         const token = localStorage.getItem("access-token");
         if (token) {
-            fetch("http://localhost:5000/user", {
+            fetch("http://localhost:5000/student_user", {
                 method: "GET",
                 headers: { "token": token },
             })
