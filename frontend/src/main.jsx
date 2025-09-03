@@ -10,19 +10,20 @@ import Root from './frontend_part/root/Root';
 import StudentProfile from './frontend_part/Profile/StudentProfile';
 import CompanyProfile from './frontend_part/Profile/CompanyProfile';
 import ApplySaForm from './frontend_part/Profile/ApplySaForm';
+import Home from './frontend_part/HomeSection/Home';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
     // errorElement: <ErrorPage></ErrorPage>,
-    // children: [
-    //   {
-    //     path: '/',
-    //     element: <Root></Root>,
-    //     // loader: () => fetch('https://nextbell-website-server-jade.vercel.app/nextbell')
-    //   },
-    // ],
+    children: [
+      {
+        path: '/',
+        element: <Home></Home>,
+        // loader: () => fetch('https://nextbell-website-server-jade.vercel.app/nextbell')
+      },
+    ],
   },
   {
     path: "/login",

@@ -21,8 +21,9 @@ import { jwtDecode } from "jwt-decode";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { href: "#", label: "Event" },
+  { href: "#", label: "Upcoming event" },
   { href: "#", label: "Internship" },
+  { href: "#", label: "Funding" },
   { href: "#", label: "About" },
 ]
 
@@ -38,7 +39,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="border-b px-4 md:px-6">
+    <header className=" px-4 md:px-6">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
@@ -85,7 +86,7 @@ export default function Navbar() {
           </Popover>
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <a href="#" className="text-primary hover:text-primary/90 font-bold">
+            <a href="#" className="text-[#3b82f6] raleway text-2xl hover:text-primary/90 font-">
               NEXTBELL
             </a>
             {/* Navigation menu */}
@@ -95,7 +96,7 @@ export default function Navbar() {
                   <NavigationMenuItem key={index}>
                     <NavigationMenuLink
                       href={link.href}
-                      className="text-muted-foreground hover:text-primary py-1.5 font-medium">
+                      className=" text-white font-serif text-lg  raleway hover:text-primary py-1.5 ">
                       {link.label}
                     </NavigationMenuLink>
                   </NavigationMenuItem>
@@ -111,7 +112,7 @@ export default function Navbar() {
           {/* User menu */}
           {!token ? (
             <NavLink to="/login">
-              <Button>Login</Button>
+              <Button className='bg-gradient-to-r from-[#5c34a0] via-[#3b82f6] to-[#9baee2] '>GET STARTED</Button>
             </NavLink>
           ) : (
             <UserMenu token={token}/>
