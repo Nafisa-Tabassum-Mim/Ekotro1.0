@@ -29,7 +29,7 @@ const navigationLinks = [
 
 export default function Navbar() {
 
-  const token = localStorage.getItem("access-token"); 
+  const token = localStorage.getItem("access-token");
   if (token) {
     const decoded = jwtDecode(token);
     // console.log(decoded.role);
@@ -86,9 +86,11 @@ export default function Navbar() {
           </Popover>
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <a href="#" className="text-[#3b82f6] raleway text-2xl hover:text-primary/90 font-">
-              NEXTBELL
-            </a>
+            <p className="story-script-regular text-white font-semibold raleway text-4xl hover: ">
+              <a className="text-[#3b82f6] ">
+                EKO
+              </a><a className="text-[#bcacd8]">TRO1.0</a>
+            </p>
             {/* Navigation menu */}
             <NavigationMenu className="max-md:hidden">
               <NavigationMenuList className="gap-2">
@@ -96,7 +98,7 @@ export default function Navbar() {
                   <NavigationMenuItem key={index}>
                     <NavigationMenuLink
                       href={link.href}
-                      className=" text-white font-serif text-lg  raleway hover:text-primary py-1.5 ">
+                      className=" text-white font-serif text-xl  raleway hover:text-primary py-1.5 ">
                       {link.label}
                     </NavigationMenuLink>
                   </NavigationMenuItem>
@@ -112,10 +114,10 @@ export default function Navbar() {
           {/* User menu */}
           {!token ? (
             <NavLink to="/login">
-              <Button className='bg-gradient-to-r from-[#5c34a0] via-[#3b82f6] to-[#9baee2] '>GET STARTED</Button>
+              <Button className='bg-gradient-to-r p-6 text-lg  from-[#5c34a0] via-[#3b82f6] to-[#9baee2] '>GET STARTED</Button>
             </NavLink>
           ) : (
-            <UserMenu token={token}/>
+            <UserMenu token={token} />
           )}
 
         </div>

@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        // loader: () => fetch('https://nextbell-website-server-jade.vercel.app/nextbell')
+        // loader: () => fetch('https://EKOTRO-website-server-jade.vercel.app/EKOTRO')
       },
     ],
   },
