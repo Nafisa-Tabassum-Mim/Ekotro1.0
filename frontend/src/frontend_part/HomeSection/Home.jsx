@@ -4,16 +4,12 @@ import { NavLink } from 'react-router-dom';
 import { Button } from "@/components/ui/button"
 import Section2 from './Section2';
 import Footer from './Footer';
+import Section1 from './Section1';
 
 const Home = () => {
     return (
         <div>
             <div className="relative h-screen overflow-hidden">
-                {/* Navbar*/}
-                <div className="absolute top-0 left-0 w-full z-20">
-                    <Navbar />
-                </div>
-
                 {/* Background Video */}
                 <video
                     className="absolute top-0 left-0 w-full h-full object-cover object-top"
@@ -56,7 +52,7 @@ const Home = () => {
             </div>
             <div>
                 {/* section 1 */}
-
+                <Section1></Section1>
                 {/* section 2 */}
                 <Section2></Section2>
                 {/* footer  */}

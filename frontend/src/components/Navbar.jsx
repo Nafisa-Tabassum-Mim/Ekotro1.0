@@ -21,8 +21,8 @@ import { jwtDecode } from "jwt-decode";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { href: "#", label: "Upcoming event" },
-  { href: "#", label: "Internship" },
+  { href: "/upcoming_event", label: "Upcoming event" },
+  { href: "/internship", label: "Internship" },
   { href: "#", label: "Funding" },
   { href: "#", label: "About" },
 ]
@@ -86,11 +86,11 @@ export default function Navbar() {
           </Popover>
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <p className="story-script-regular text-white font-semibold raleway text-4xl hover: ">
+         <NavLink to='/'>   <p className="story-script-regular text-white font-semibold raleway text-4xl hover: ">
               <a className="text-[#3b82f6] ">
                 EKO
               </a><a className="text-[#bcacd8]">TRO1.0</a>
-            </p>
+            </p></NavLink>
             {/* Navigation menu */}
             <NavigationMenu className="max-md:hidden">
               <NavigationMenuList className="gap-2">

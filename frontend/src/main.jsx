@@ -11,6 +11,8 @@ import StudentProfile from './frontend_part/Profile/StudentProfile';
 import CompanyProfile from './frontend_part/Profile/CompanyProfile';
 import ApplySaForm from './frontend_part/Profile/ApplySaForm';
 import Home from './frontend_part/HomeSection/Home';
+import UpcomingEvent from './frontend_part/Event/UpcomingEvent';
+import Internship from './frontend_part/Event/Internship';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,15 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home></Home>,
         // loader: () => fetch('https://EKOTRO-website-server-jade.vercel.app/EKOTRO')
+      },
+      {
+        path: '/upcoming_event',
+        element: <UpcomingEvent></UpcomingEvent>,
+        loader: () => fetch('http://127.0.0.1:5000/event')
+      },
+      {
+        path: '/internship',
+        element: <Internship></Internship>,
       },
     ],
   },

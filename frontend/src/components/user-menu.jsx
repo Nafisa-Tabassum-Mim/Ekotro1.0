@@ -47,7 +47,7 @@ export default function UserMenu({ token }) {
         return (
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <BoltIcon size={16} className="opacity-60" /> 
+              <BoltIcon size={16} className="opacity-60" />
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Layers2Icon size={16} className="opacity-60" /> Create Event
@@ -115,20 +115,21 @@ export default function UserMenu({ token }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
-          <Avatar>
-            <AvatarImage src="./avatar.jpg" alt="Profile image" />
-            <AvatarFallback>KK</AvatarFallback>
+          <Avatar className="h-12  w-12">
+            <AvatarImage src="/images/user1.jpg" alt="Profile image" />
+            <AvatarFallback>U</AvatarFallback>
           </Avatar>
         </Button>
+
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="max-w-64" align="end">
         <DropdownMenuLabel className="flex flex-col min-w-0">
           <span className="text-foreground truncate text-sm font-medium">
-           {name}
+            {name}
           </span>
           <span className="text-muted-foreground truncate text-xs font-normal">
-          {email}
+            {email}
           </span>
         </DropdownMenuLabel>
 
