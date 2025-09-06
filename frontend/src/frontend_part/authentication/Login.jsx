@@ -32,12 +32,12 @@ const Login = () => {
                     return;
                 }
                 // success case
-                // console.log("✅ login successful:", data);
+                // console.log("login successful:", data);
                 setError(""); // clear previous error
                 // Save token in localStorage
                 localStorage.setItem("access-token", data.token); // <-- store token
 
-                // Optional: redirect user
+                //  redirect user
                 navigate("/");
             })
             .catch(err => {

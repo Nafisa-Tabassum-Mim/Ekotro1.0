@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Spinner } from '@/components/ui/shadcn-io/spinner';
 import { FaFastBackward } from "react-icons/fa";
+import { jwtDecode } from "jwt-decode";
+import { ToastContainer, toast } from 'react-toastify';
 
 const EventDetails = () => {
     const { event_id } = useParams();
@@ -29,6 +31,36 @@ const EventDetails = () => {
             </div>
         );
     }
+
+
+
+    const addToWishlist = async (eventId) => {
+        const token = localStorage.getItem("access-token");
+        if (token) {
+            const decoded = jwtDecode(token);
+            const user_id = decoded.user_id;
+
+            const wishInfo = { user_id, eventId };
+
+            await fetch("http://127.0.0.1:5000/wishlist", {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(wishInfo),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    // console.log(data);
+                    if (data.message === "Already in wishlist") {
+                        toast.error("Already added in your wishlist!");
+                    } else {
+                        toast.success("🎉 Event added to wishlist!");
+                    }
+                })
+                .catch((err) => console.error(err));
+        }
+    };
+
+
 
     return (
         <div className="max-w-5xl mx-auto p-6">
@@ -85,36 +117,39 @@ const EventDetails = () => {
             </Card>
 
             {/* Links */}
-  <div className="flex flex-col md:flex-row md:justify-between items-start gap-4 mb-6">
-  {/* Left side links */}
-  <div className="flex gap-4">
-    {event.weblink && (
-      <a
-        href={event.weblink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="border hover:bg-[#66d9ef] px-4 py-2 rounded-lg text-center"
-      >
-        Event Website
-      </a>
-    )}
-    {event.fb_link && (
-      <a
-        href={event.fb_link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="px-4 py-2 rounded-lg text-center bg-gradient-to-r from-[#5c34a0] to-blue-500 text-white"
-      >
-        Facebook Event
-      </a>
-    )}
-  </div>
+            <div className="flex flex-col md:flex-row md:justify-between items-start gap-4 mb-6">
+                {/* Left side links */}
+                <div className="flex gap-4">
+                    {event.weblink && (
+                        <a
+                            href={event.weblink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="border hover:bg-[#66d9ef] px-4 py-2 rounded-lg text-center"
+                        >
+                            Event Website
+                        </a>
+                    )}
+                    {event.fb_link && (
+                        <a
+                            href={event.fb_link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 rounded-lg text-center bg-gradient-to-r from-[#5c34a0] to-blue-500 text-white"
+                        >
+                            Facebook Event
+                        </a>
+                    )}
+                </div>
 
-  {/* Right side button */}
-  <Button className="p-[22px] bg-gradient-to-r from-[#9c88c0] to-blue-800 text-white">
-    Add to Wishlist
-  </Button>
-</div>
+                {/* Right side button */}
+                <Button
+                    className="p-[22px] bg-gradient-to-r from-[#9c88c0] to-blue-800 text-white"
+                    onClick={() => addToWishlist(event.event_id)}>
+                    Add to Wishlist
+                </Button>
+            </div>
+            <ToastContainer />
 
         </div>
     );
