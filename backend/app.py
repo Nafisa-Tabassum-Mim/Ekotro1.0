@@ -55,7 +55,8 @@ def register_user():
         token = jwt.encode(
             {
                 "public_id": new_user["public_id"],
-                "role": new_user["role"],  # default role
+                "user_id": new_user["user_id"],
+                "role": new_user["role"],  
                 "name": new_user["name"],
                 "email": new_user["email"],
                 "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=4500),
@@ -109,7 +110,8 @@ def register_company():
         token = jwt.encode(
             {
                 "public_id": new_user["public_id"],
-                "role": new_user["role"],  # default role
+                "user_id": new_user["user_id"],
+                "role": new_user["role"],  
                 "name": new_user["name"],
                 "email": new_user["email"],
                 "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=4500),
@@ -152,6 +154,7 @@ def login():
         token = jwt.encode(
             {
                 "public_id": existing_user["public_id"],
+                "user_id": existing_user["user_id"],
                 "role": existing_user["role"],
                 "name": existing_user["name"],
                 "email": existing_user["email"],
@@ -395,7 +398,26 @@ def event_detail(event_id):
     cursor.close()
     return jsonify(event)
 
-
+# event wishlist 
+@app.route("/wishlist", methods=["POST"])
+def add_to_wishlist():
+    data = request.get_json()
+    user_id = data.get("user_id")
+    event_id = data.get("eventId") 
+    cursor = conn.cursor()
+    try:
+        cursor.execute(
+            "INSERT INTO stu_in_event (ss_userID, event_id) VALUES (%s, %s)",
+            (user_id, event_id),
+        )
+        conn.commit()
+        return jsonify({"message": "Added to wishlist"}), 201
+    except  mysql.connector.IntegrityError:
+        return jsonify({"message": "Already in wishlist"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
 
 if __name__ == "__main__":
     app.run(debug=True)
