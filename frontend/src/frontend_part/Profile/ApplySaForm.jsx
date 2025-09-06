@@ -7,7 +7,7 @@ import { Spinner } from '@/components/ui/shadcn-io/spinner';
 import { useNavigate } from "react-router-dom";
 
 const ApplySaForm = () => {
-    const [loading, setLoading] = useState(true); // <-- loader state
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [frontPreview, setFrontPreview] = useState(null);
     const [backPreview, setBackPreview] = useState(null);

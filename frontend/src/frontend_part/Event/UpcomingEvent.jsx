@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useLoaderData } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
 
 
 const UpcomingEvent = () => {
@@ -118,10 +118,12 @@ const UpcomingEvent = () => {
               </div>
 
               <div className="flex gap-3 mt-4 md:mt-0">
-                <Button variant="outline">View Details</Button>
-                <Button className="bg-gradient-to-r from-[#5c34a0] to-blue-500 text-white">
-                  Add to wishlist
-                </Button>
+                <NavLink to={`${event.event_id}`}>
+                  <Button className="bg-gradient-to-r from-[#5c34a0] to-blue-500 text-white">
+                    View Details
+                  </Button>
+                </NavLink>
+
               </div>
             </CardContent>
           </Card>

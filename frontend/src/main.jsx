@@ -13,6 +13,8 @@ import ApplySaForm from './frontend_part/Profile/ApplySaForm';
 import Home from './frontend_part/HomeSection/Home';
 import UpcomingEvent from './frontend_part/Event/UpcomingEvent';
 import Internship from './frontend_part/Event/Internship';
+import EventDetails from './frontend_part/Event/EventDetails';
+import ProtectedRoute from './frontend_part/authentication/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
         path: '/upcoming_event',
         element: <UpcomingEvent></UpcomingEvent>,
         loader: () => fetch('http://127.0.0.1:5000/event')
+      },
+      {
+        path: '/upcoming_event/:event_id',
+        element:<ProtectedRoute> <EventDetails></EventDetails></ProtectedRoute>,
       },
       {
         path: '/internship',
