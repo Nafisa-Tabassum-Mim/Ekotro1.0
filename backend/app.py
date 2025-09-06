@@ -96,7 +96,7 @@ def register_company():
             "INSERT INTO company (c_id, web_link) VALUES (%s, %s)", (user_id, web_link)
         )
 
-        conn.commit()  # Save changes
+        conn.commit()  
         cursor.close()
 
         # Fetch the newly created user
@@ -157,7 +157,7 @@ def login():
                 "email": existing_user["email"],
                 "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=4500),
             },
-            app.config["SECRET_KEY"],  # define this in your config
+            app.config["SECRET_KEY"],  
             algorithm="HS256",
         )
         return jsonify({"token": token}), 200
@@ -193,8 +193,6 @@ def token_required(f):
         return f(login_user["email"], *args, **kwargs)
 
     return decorator
-
-
 
 
 # @app.route("/", methods=["GET"])
@@ -250,8 +248,7 @@ def get_student_user(email):
 def update_student(user_id):
     data = request.get_json()
     cursor = conn.cursor()
-    
-    
+
     cursor.execute(
         "UPDATE user SET fb_link=%s WHERE user_id=%s", (data.get("fb_link"), user_id)
     )
@@ -270,6 +267,27 @@ def update_student(user_id):
     return jsonify({"message": "User updated successfully!"})
 
 
+# check sa
+
+
+@app.route("/checksa/<int:sa_id>", methods=["GET"])
+def check_sa(sa_id):
+    try:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(
+            "SELECT sa_id FROM student_ambassador WHERE sa_id = %s LIMIT 1", (sa_id,)
+        )
+        result = cursor.fetchone()
+        cursor.close()
+
+        if result:
+            return jsonify({"exists": True})
+        else:
+            return jsonify({"exists": False})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route("/applyAmbassador/<int:user_id>", methods=["POST"])
 def apply_for_sa(user_id):
     data = request.get_json()
@@ -279,7 +297,7 @@ def apply_for_sa(user_id):
         # ✅ Update fb_link in user table
         cursor.execute(
             "UPDATE user SET fb_link = %s WHERE user_id = %s",
-            (data.get("fb_link"), user_id)
+            (data.get("fb_link"), user_id),
         )
 
         # ✅ Insert into student_ambassador table
@@ -292,11 +310,11 @@ def apply_for_sa(user_id):
                 user_id,
                 data.get("uni_name"),
                 data.get("dept"),
-                # data.get("front_part"),   
-                # data.get("back_part"),   
+                # data.get("front_part"),
+                # data.get("back_part"),
                 data.get("club_name"),
                 data.get("club_position"),
-                data.get("uni_weblink")
+                data.get("uni_weblink"),
             ),
         )
 
@@ -310,7 +328,8 @@ def apply_for_sa(user_id):
     finally:
         cursor.close()
 
-# company part 
+
+# company part
 
 @app.route("/company_user", methods=["GET"])
 @token_required
@@ -333,27 +352,49 @@ def get_user(email):
     return jsonify(user_company)
 
 
-
 @app.route("/updateCompany/<int:id>", methods=["PATCH"])
 def update_company(id):
-        data = request.get_json()
-        fb_link = data.get("fb_link")
+    data = request.get_json()
+    fb_link = data.get("fb_link")
 
-        cursor = conn.cursor()
-        cursor.execute(
-            "UPDATE user SET fb_link = %s WHERE user_id = %s",
-            (fb_link, id)
-        )
-        conn.commit()
-        cursor.close()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE user SET fb_link = %s WHERE user_id = %s", (fb_link, id))
+    conn.commit()
+    cursor.close()
 
-        return jsonify({"message": "Company info updated successfully"}), 200
-    
+    return jsonify({"message": "Company info updated successfully"}), 200
 
-# @app.route("/admin-only")
-# @role_required("admin")
-# def admin_panel():
-#     return jsonify({"message": "Welcome Admin!"})
+
+# event part 
+
+@app.route("/event", methods=["GET"])
+def events():
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT 
+            e.event_id,
+            e.name,
+            e.uni_name,
+            e.location,
+            e.deadline,
+            e.prize_money,
+            GROUP_CONCAT(ec.category) AS categories
+        FROM Event e
+        LEFT JOIN event_category ec ON e.event_id = ec.e_id
+        GROUP BY e.event_id
+    """)
+    events = cursor.fetchall()  
+    cursor.close()
+    return jsonify(events)  
+
+@app.route("/event/<int:event_id>", methods=["GET"])
+def event_detail(event_id):
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM event WHERE event_id = %s", (event_id,))
+    event = cursor.fetchone()  
+    cursor.close()
+    return jsonify(event)
+
 
 
 if __name__ == "__main__":
