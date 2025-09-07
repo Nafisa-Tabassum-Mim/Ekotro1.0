@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -100,12 +100,13 @@ const StudentProfile = () => {
                             Profile Completeness
                         </p>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                            <div className="w-full h-2 bg-blue-600 rounded-full"></div>
+                            <div className="w-1/5 h-2 bg-blue-600 rounded-full"></div>
                         </div>
                         <p className="text-xs mt-1 text-blue-600 font-medium text-right">
-                            100% Complete
+                            20% Complete
                         </p>
                     </div>
+
                 </Card>
 
                 {/* Right Content */}

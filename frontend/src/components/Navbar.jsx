@@ -24,7 +24,7 @@ const navigationLinks = [
   { href: "/upcoming_event", label: "Upcoming event" },
   { href: "/internship", label: "Internship" },
   { href: "#", label: "Funding" },
-  { href: "#", label: "About" },
+  { href: "/contact_us", label: "Contact Us" },
 ]
 
 export default function Navbar() {

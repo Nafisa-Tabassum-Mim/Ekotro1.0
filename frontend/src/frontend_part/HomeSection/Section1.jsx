@@ -3,47 +3,40 @@ const events = {
   registration: [
     {
       day: "Day 1",
-      date: "October 24, 2024",
       title: "Registration Opens",
-      desc: "Registration for IntraHacktive 1.0 begins. Participants can register online through the website."
+      desc: "Click on Sign Up / Register. Choose your role: Student or Company. Fill in your details (name, email, password, university/company, etc.).Confirm your email if required. or student."
     },
     {
       day: "Day 2",
-      date: "October 28, 2024",
-      title: "Debuggers and Database Wizard Deadline",
-      desc: "Registration deadline for Debuggers and Database Wizard challenges. Ensure your registration is completed by this date."
+      title: "Complete Your Profile",
+      desc: "Log in to your account.Upload a profile photo.Add social links (optional, e.g., LinkedIn, Facebook).For students: add your university, department, and year.For companies: add your organization name and type of events you host."
     },
     {
       day: "Day 3",
-      date: "October 31, 2024",
-      title: "Hackathon Deadline",
-      desc: "Registration along with the submission deadline for the high-level solution and video presentation for the Hackathon. Teams will be shortlisted based on this submission."
+      title: "Explore Events",
+      desc: "Navigate to the Events section.Browse events by university, category, or date. Click on an event to see full details: Description Date & Time Location (online or offline) Participation requirements"
     }
   ],
   mainEvents: [
     {
       day: "Day 3",
-      date: "November 3, 2024",
-      title: "Online Round for Debuggers & Database Wizard",
-      desc: "Compete in the online preliminary round for Debuggers and Database Wizard. Participants will be tested on their debugging skills or database management expertise."
+      title: "Register for an Event",
+      desc: "Select the event you want to join.Click Register / Join. Fill in any required information (e.g., team members, project details). Confirm your registration. For companies hosting events: you can create an event by providing all details and setting deadlines."
     },
     {
       day: "Day 4",
-      date: "November 8, 2024",
-      title: "Online Hackathon Begins",
-      desc: "The online Hackathon starts. Teams will receive a contained version of their preliminary problem statement and must create a product within 72 hours."
+      title: "Participate in Events",
+      desc: "For online events: Log in on the event date. Access resources, challenges, or competition tasks. Submit your work via Ekotro 1.0. For offline events: Check the event location and schedule. Attend on time and use Ekotro 1.0 to track your results or submissions."
     },
     {
       day: "Day 5",
-      date: "November 10, 2024",
-      title: "Online Hackathon Ends",
-      desc: "The 72-hour online Hackathon comes to an end. Submissions must be made before the deadline."
+      title: "Track Your Progress",
+      desc: "Visit your Dashboard to see. Events you joined Deadlines and reminders Submissions and results For companies: monitor participant registrations, submissions, and feedback."
     },
     {
       day: "Day 6",
-      date: "November 11, 2024",
-      title: "Final Round and Presentations",
-      desc: "On-campus final round for Hackathon, Debuggers, and Database Wizard. Teams will polish their products for Hackathon and present to judges. Debuggers and Database Wizards will compete offline."
+      title: "Get Notifications & Updates",
+      desc: "Enable notifications to receive. New events at your university Reminders for deadlines Announcements from companies or event organizers"
     }
   ]
 };
@@ -70,7 +63,6 @@ const Section1 = () => {
                   </div>
                 </div>
                 <div>
-                  <p className="text-gray-600">{item.date}</p>
                   <h4 className="font-bold text-lg mt-1">{item.title}</h4>
                   <p className="text-gray-500">{item.desc}</p>
                 </div>
@@ -93,7 +85,6 @@ const Section1 = () => {
                   </div>
                 </div>
                 <div>
-                  <p className="text-gray-600">{item.date}</p>
                   <h4 className="font-bold text-lg mt-1">{item.title}</h4>
                   <p className="text-gray-500">{item.desc}</p>
                 </div>

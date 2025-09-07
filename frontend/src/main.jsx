@@ -15,6 +15,7 @@ import UpcomingEvent from './frontend_part/Event/UpcomingEvent';
 import Internship from './frontend_part/Event/Internship';
 import EventDetails from './frontend_part/Event/EventDetails';
 import ProtectedRoute from './frontend_part/authentication/ProtectedRoute';
+import ContactUs from './frontend_part/HomeSection/ContactUs';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/internship',
         element: <Internship></Internship>,
+      },
+      {
+        path: '/contact_us',
+        element: <ContactUs></ContactUs>,
       },
     ],
   },
