@@ -16,6 +16,7 @@ import Internship from './frontend_part/Event/Internship';
 import EventDetails from './frontend_part/Event/EventDetails';
 import ProtectedRoute from './frontend_part/authentication/ProtectedRoute';
 import ContactUs from './frontend_part/HomeSection/ContactUs';
+import EventWishlist from './frontend_part/Profile/EventWishlist';
 
 const router = createBrowserRouter([
   {
@@ -63,14 +64,18 @@ const router = createBrowserRouter([
     path: "/student_profile",
     element: <StudentProfile></StudentProfile>,
   },
+    {
+    path: "/apply_sa",
+    element: <ApplySaForm></ApplySaForm>,
+  },
+    {
+    path: "/my_eventList",
+    element: <EventWishlist></EventWishlist>,
+  },
   {
     path: "/company_profile",
     element: <CompanyProfile></CompanyProfile>,
   },
-  {
-    path: "/apply_sa",
-    element: <ApplySaForm></ApplySaForm>,
-  }
 ]);
 
 createRoot(document.getElementById('root')).render(

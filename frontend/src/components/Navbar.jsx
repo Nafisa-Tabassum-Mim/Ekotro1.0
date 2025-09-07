@@ -15,7 +15,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { NavLink } from "react-router-dom"
-import { jwtDecode } from "jwt-decode";
 
 
 
@@ -30,13 +29,13 @@ const navigationLinks = [
 export default function Navbar() {
 
   const token = localStorage.getItem("access-token");
-  if (token) {
-    const decoded = jwtDecode(token);
+  // if (token) {
+    // const decoded = jwtDecode(token);
     // console.log(decoded.role);
     // console.log(decoded.public_id);
-  } else {
-    console.log("No token found");
-  }
+  // } else {
+  //   console.log("No token found");
+  // }
 
   return (
     <header className=" px-4 md:px-6">

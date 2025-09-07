@@ -86,7 +86,7 @@ export default function UserMenu({ token }) {
               <BoltIcon size={16} className="opacity-60" /> <NavLink to="/apply_sa">Apply for SA</NavLink>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Layers2Icon size={16} className="opacity-60" /> Event Wishlist
+              <Layers2Icon size={16} className="opacity-60" /> <NavLink to="/my_eventList">Event Wishlist</NavLink>
             </DropdownMenuItem>
           </DropdownMenuGroup>
         );
