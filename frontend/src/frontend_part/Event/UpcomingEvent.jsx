@@ -1,13 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { NavLink, useLoaderData } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const UpcomingEvent = () => {
   const loadEvents = useLoaderData();
   const [events, setEvents] = useState(loadEvents);
+  const [role, setRole] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("access-token");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setRole(decoded.role);
+      } catch (err) {
+        // console.error("Invalid token:", err);
+      }
+    }
+  }, []);
+  const isAdmin = role === "admin";
 
   const [searchUni, setSearchUni] = useState("");
   const [searchType, setSearchType] = useState("");
@@ -27,6 +43,21 @@ const UpcomingEvent = () => {
     (event.uni_name ? event.uni_name.toLowerCase() : "").includes(searchUni.toLowerCase()) &&
     (event.location ? event.location.toLowerCase() : "").includes(searchType.toLowerCase())
   );
+
+  const deleteEvent = async (eventId) => {
+    try {
+      const res = await fetch(`http://127.0.0.1:5000/event/${eventId}`, {
+        method: 'DELETE',
+      });
+      const result = await res.json();
+      if (result.message === "Event removed successfully!") {
+        toast.success("Event deleted");
+      }
+      setEvents(prev => prev.filter(event => event.event_id !== eventId));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className=" mx-auto p-6">
@@ -124,6 +155,22 @@ const UpcomingEvent = () => {
                   </Button>
                 </NavLink>
 
+                {isAdmin && (
+                  <div className="flex gap-3 md:mt-0">
+                    <button
+                      onClick={() => deleteEvent(event.event_id)}
+                      className="bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded-lg"
+                    >
+                      Delete Event
+                    </button>
+                    <NavLink to={`fund/${event.event_id}`}>
+                      <Button className="bg-[#8154ce]  text-white">
+                        Apply Funding
+                      </Button>
+                    </NavLink>
+                  </div>
+                )}
+
               </div>
             </CardContent>
           </Card>
@@ -133,6 +180,17 @@ const UpcomingEvent = () => {
           <p className="text-gray-500">No events found matching criteria.</p>
         )}
       </div>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="colored"
+      />
     </div>
   );
 };

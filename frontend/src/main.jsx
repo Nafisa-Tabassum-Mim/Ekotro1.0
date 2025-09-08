@@ -6,7 +6,6 @@ import Login from './frontend_part/authentication/Login';
 import StudentRegister from './frontend_part/authentication/StudentRegister';
 import CompanyRegister from './frontend_part/authentication/CompanyRegister';
 import Root from './frontend_part/root/Root';
-// import UserProfile from './frontend_part/CommonPage/UserProfile';
 import StudentProfile from './frontend_part/Profile/StudentProfile';
 import CompanyProfile from './frontend_part/Profile/CompanyProfile';
 import ApplySaForm from './frontend_part/Profile/ApplySaForm';
@@ -17,6 +16,11 @@ import EventDetails from './frontend_part/Event/EventDetails';
 import ProtectedRoute from './frontend_part/authentication/ProtectedRoute';
 import ContactUs from './frontend_part/HomeSection/ContactUs';
 import EventWishlist from './frontend_part/Profile/EventWishlist';
+import CreateEvent from './frontend_part/AdminPage/CreateEvent';
+import ApplyFunding from './frontend_part/AdminPage/ApplyFunding';
+import Funding from './frontend_part/Event/Funding';
+import All_sa from './frontend_part/AdminPage/All_sa';
+import ProtectedAdminRoute from './frontend_part/authentication/ProtectedAdminRoute';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +31,6 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        // loader: () => fetch('https://EKOTRO-website-server-jade.vercel.app/EKOTRO')
       },
       {
         path: '/upcoming_event',
@@ -36,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/upcoming_event/:event_id',
-        element:<ProtectedRoute> <EventDetails></EventDetails></ProtectedRoute>,
+        element: <ProtectedRoute> <EventDetails></EventDetails></ProtectedRoute>,
       },
       {
         path: '/internship',
@@ -45,6 +48,36 @@ const router = createBrowserRouter([
       {
         path: '/contact_us',
         element: <ContactUs></ContactUs>,
+      },
+      // admin 
+      {
+        path: "/create_event",
+        element: <ProtectedAdminRoute><CreateEvent></CreateEvent></ProtectedAdminRoute>,
+      },
+      {
+        path: '/upcoming_event/fund/:event_id',
+        element: <ProtectedAdminRoute> <ApplyFunding></ApplyFunding></ProtectedAdminRoute>,
+      },
+      // student 
+      {
+        path: "/student_profile",
+        element: <ProtectedRoute><StudentProfile></StudentProfile></ProtectedRoute>,
+      },
+      {
+        path: "/apply_sa",
+        element: <ProtectedRoute><ApplySaForm></ApplySaForm></ProtectedRoute>,
+      },
+      {
+        path: "/my_eventList",
+        element: <ProtectedRoute><EventWishlist></EventWishlist></ProtectedRoute>,
+      },
+      {
+        path: "/all_student_ambassador",
+        element: <ProtectedRoute><All_sa></All_sa></ProtectedRoute>,
+      },
+      {
+        path: "/funding",
+        element: <Funding></Funding>,
       },
     ],
   },
@@ -59,18 +92,6 @@ const router = createBrowserRouter([
   {
     path: "/company_register",
     element: <CompanyRegister></CompanyRegister>,
-  },
-  {
-    path: "/student_profile",
-    element: <StudentProfile></StudentProfile>,
-  },
-    {
-    path: "/apply_sa",
-    element: <ApplySaForm></ApplySaForm>,
-  },
-    {
-    path: "/my_eventList",
-    element: <EventWishlist></EventWishlist>,
   },
   {
     path: "/company_profile",

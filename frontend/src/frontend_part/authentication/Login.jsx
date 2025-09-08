@@ -11,8 +11,6 @@ const Login = () => {
         const email = e.target.email.value
         const password = e.target.password.value
 
-        // console.log(name, email, password)
-
         const newRegister = { name, email, password }
 
         await fetch("http://127.0.0.1:5000/login", {
@@ -20,9 +18,6 @@ const Login = () => {
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(newRegister)
         })
-            // .then(res => res.json())
-            // .then(data => console.log(data))
-            // .catch(err => console.error(err))
 
             .then(async (res) => {
                 const data = await res.json();

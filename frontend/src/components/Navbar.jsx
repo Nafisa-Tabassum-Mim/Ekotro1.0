@@ -22,20 +22,13 @@ import { NavLink } from "react-router-dom"
 const navigationLinks = [
   { href: "/upcoming_event", label: "Upcoming event" },
   { href: "/internship", label: "Internship" },
-  { href: "#", label: "Funding" },
+  { href: "/funding", label: "Funding" },
   { href: "/contact_us", label: "Contact Us" },
 ]
 
 export default function Navbar() {
 
   const token = localStorage.getItem("access-token");
-  // if (token) {
-    // const decoded = jwtDecode(token);
-    // console.log(decoded.role);
-    // console.log(decoded.public_id);
-  // } else {
-  //   console.log("No token found");
-  // }
 
   return (
     <header className=" px-4 md:px-6">
@@ -85,11 +78,13 @@ export default function Navbar() {
           </Popover>
           {/* Main nav */}
           <div className="flex items-center gap-6">
-         <NavLink to='/'>   <p className="story-script-regular text-white font-semibold raleway text-4xl hover: ">
-              <a className="text-[#3b82f6] ">
-                EKO
-              </a><a className="text-[#bcacd8]">TRO1.0</a>
-            </p></NavLink>
+            <NavLink to='/'>
+              <div className="story-script-regular font-semibold text-4xl flex gap-1 hover:opacity-80">
+                <span className="text-[#3b82f6]">EKO</span>
+                <span className="text-[#bcacd8]">TRO1.0</span>
+              </div>
+            </NavLink>
+
             {/* Navigation menu */}
             <NavigationMenu className="max-md:hidden">
               <NavigationMenuList className="gap-2">

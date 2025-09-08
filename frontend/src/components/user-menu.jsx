@@ -47,13 +47,10 @@ export default function UserMenu({ token }) {
         return (
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <BoltIcon size={16} className="opacity-60" />Create Event
+              <BoltIcon size={16} className="opacity-60" /><NavLink to="/create_event">Create Event</NavLink>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Layers2Icon size={16} className="opacity-60" />  All events
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <BookOpenIcon size={16} className="opacity-60" /> All student ambassador
+              <BookOpenIcon size={16} className="opacity-60" /> <NavLink to="/all_student_ambassador">All student ambassador</NavLink>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <PinIcon size={16} className="opacity-60" /> Add Internship
